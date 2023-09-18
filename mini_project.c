@@ -23,7 +23,8 @@ STUDENT *insert(STUDENT *head, char name[], char id[], char email[], char cell[]
 	strcpy(temp_student->blood, blood);
 
 	if (head == NULL) {
-		head = temp_student; // if heal is null that means this is the first node
+		// if head is null that means this is the first node
+		head = temp_student; 
 	} else {
 		// if not empty inserting at the beginning of the head
 		temp_student->next = head;
