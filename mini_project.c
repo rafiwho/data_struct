@@ -48,7 +48,7 @@ STUDENT *delete(STUDENT *head, char name[]) {
 	STUDENT *temp1 = head;
 	STUDENT *temp2 = head;
 	while (temp1 != NULL) {
-		if (strcmp(temp1->name, name) == 0) {
+		if (!strcmp(temp1->name, name)) {
 			if (temp1 == temp2) {
 				// this means this is the first node
 				head = head->next;
