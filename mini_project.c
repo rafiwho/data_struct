@@ -24,7 +24,7 @@ STUDENT *insert(STUDENT *head, char name[], char id[], char email[], char cell[]
 
 	if (head == NULL) {
 		// if head is null that means this is the first node
-		head = temp_student; 
+		head = temp_student;
 	} else {
 		// if not empty inserting at the beginning of the head
 		temp_student->next = head;
@@ -36,7 +36,7 @@ STUDENT *insert(STUDENT *head, char name[], char id[], char email[], char cell[]
 void display(STUDENT *head) {
 	STUDENT *temp_student = head;
 	while (temp_student != NULL) {
-		printf("Name : %s\n", temp_student->name);
+		printf("\nName : %s\n", temp_student->name);
 		printf("Id : %s\n", temp_student->id);
 		printf("Email : %s\n", temp_student->email);
 		printf("Cell : %s\n", temp_student->cell);
@@ -75,7 +75,7 @@ void search_with_id(STUDENT *head, char id[]) {
 
 		// strcmp return 0 if found matches
 		if (!strcmp(temp_student->id, id)) {
-			printf("Name : %s\n", temp_student->name);
+			printf("\nName : %s\n", temp_student->name);
 			printf("Id : %s\n", temp_student->id);
 			printf("Email : %s\n", temp_student->email);
 			printf("Cell : %s\n", temp_student->cell);
@@ -94,7 +94,64 @@ void search_with_blood_group(STUDENT *head, char blood[]) {
 
 		// strcmp return 0 if found matches
 		if (!strcmp(temp_student->blood, blood)) {
-			printf("Name : %s\n", temp_student->name);
+			printf("\nName : %s\n", temp_student->name);
+			printf("Id : %s\n", temp_student->id);
+			printf("Email : %s\n", temp_student->email);
+			printf("Cell : %s\n", temp_student->cell);
+			printf("Blood group : %s\n", temp_student->blood);
+			return ;
+		}
+		temp_student = temp_student->next;
+	}
+	printf("Student's information not found\n");
+}
+void search_with_name(STUDENT *head, char name[]) {
+
+	STUDENT *temp_student = head;
+
+	while (temp_student != NULL) {
+
+		// strcmp return 0 if found matches
+		if (!strcmp(temp_student->name, name)) {
+			printf("\nName : %s\n", temp_student->name);
+			printf("Id : %s\n", temp_student->id);
+			printf("Email : %s\n", temp_student->email);
+			printf("Cell : %s\n", temp_student->cell);
+			printf("Blood group : %s\n", temp_student->blood);
+			return ;
+		}
+		temp_student = temp_student->next;
+	}
+	printf("Student's information not found\n");
+}
+void search_with_cell(STUDENT *head, char cell[]) {
+
+	STUDENT *temp_student = head;
+
+	while (temp_student != NULL) {
+
+		// strcmp return 0 if found matches
+		if (!strcmp(temp_student->cell, cell)) {
+			printf("\nName : %s\n", temp_student->name);
+			printf("Id : %s\n", temp_student->id);
+			printf("Email : %s\n", temp_student->email);
+			printf("Cell : %s\n", temp_student->cell);
+			printf("Blood group : %s\n", temp_student->blood);
+			return ;
+		}
+		temp_student = temp_student->next;
+	}
+	printf("Student's information not found\n");
+}
+void search_with_email(STUDENT *head, char email[]) {
+
+	STUDENT *temp_student = head;
+
+	while (temp_student != NULL) {
+
+		// strcmp return 0 if found matches
+		if (!strcmp(temp_student->email, email)) {
+			printf("\nName : %s\n", temp_student->name);
 			printf("Id : %s\n", temp_student->id);
 			printf("Email : %s\n", temp_student->email);
 			printf("Cell : %s\n", temp_student->cell);
@@ -116,10 +173,13 @@ int main() {
 	int choice = 1;
 	while (choice) {
 		printf("1 for inserting student's details :\n");
-		printf("2 for a student's all information :\n");
+		printf("2 for all student's information :\n");
 		printf("3 for deleting a student's details using name :\n");
 		printf("4 for searching student's details with id :\n");
 		printf("5 for searching student's details with blood group :\n");
+		printf("6 for searching student's details with email :\n");
+		printf("7 for searching student's details with cell :\n");
+		printf("8 for searching student's details with name :\n");
 		printf("Enter your choice :\n");
 		scanf("%d", &choice);
 		getchar();
@@ -161,8 +221,24 @@ int main() {
 			fgets(blood, 100, stdin);
 			search_with_blood_group(head, blood);
 			break;
+		case 6:
+			printf("Enter an email for searching : ");
+			fgets(email, 100, stdin);
+			search_with_email(head, email);
+			break;
+		case 7:
+			printf("Enter a cell number for searching : ");
+			fgets(cell, 100, stdin);
+			search_with_cell(head, cell);
+			break;
+		case 8:
+			printf("Enter a name for searching : ");
+			fgets(name, 100, stdin);
+			search_with_name(head, name);
+			break;
 		default:
-			printf("Wrong input\n");
+			if (choice)
+				printf("Wrong input\n");
 			break;
 		}
 	}
