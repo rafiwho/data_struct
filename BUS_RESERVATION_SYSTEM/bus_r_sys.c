@@ -212,6 +212,32 @@ void bubbleSortBusesByAvailableSeats(struct Bus* head) {
 		last = currentBus;
 	}
 }
+void GENERATE_PDF(struct Bus* head, const char* filename) {
+	FILE* file = fopen(filename, "w");
+	if (!file) {
+		printf("Error: Cannot open file %s.\n", filename);
+		return;
+	}
+
+	struct Bus* currentBus = head;
+	while (currentBus != NULL) {
+		fprintf(file, "Bus %d:\n", currentBus->bus_number);
+
+		struct Seat* currentSeat = currentBus->seats;
+		while (currentSeat != NULL) {
+			fprintf(file, "Seat %d: %s\n", currentSeat->seat_number,
+			        currentSeat->is_reserved ? "Reserved" : "Available");
+			currentSeat = currentSeat->next;
+		}
+
+		fprintf(file, "\n");
+		currentBus = currentBus->next;
+	}
+
+	fclose(file);
+
+	printf("Bus information saved to %s\n", filename);
+}
 
 int main() {
 	int totalBuses = 5;
@@ -227,7 +253,8 @@ int main() {
 		printf("4. View reservation details\n");
 		printf("5. Sort buses by number \n");
 		printf("6. Sort buses by available seats \n");
-		printf("7. Exit\n");
+		printf("7. Generate Pdf of all available buses \n");
+		printf("8. Exit\n");
 
 		printf("Enter your choice: ");
 		scanf("%d", &choice);
@@ -266,12 +293,15 @@ int main() {
 			printf("Buses sorted by available seats using Bubble Sort.\n");
 			break;
 		case 7:
+			GENERATE_PDF(buses, "info.pdf");
+			break;
+		case 8:
 			printf("Exiting the program. Goodbye!\n");
 			break;
 		default:
 			printf("Invalid choice. Please try again.\n");
 		}
-	} while (choice != 7);
+	} while (choice != 8);
 
 	return 0;
 }
