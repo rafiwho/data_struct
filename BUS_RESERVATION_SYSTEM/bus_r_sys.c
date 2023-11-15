@@ -144,12 +144,17 @@ void viewReservationDetails(struct Bus* head, int busNumber, int seatNumber) {
 	printf("Status: %s\n", currentSeat->is_reserved ? "Reserved" : "Available");
 }
 
-
 void swapBuses(struct Bus* bus1, struct Bus* bus2) {
 	int temp_bus_number = bus1->bus_number;
+	struct Seat* temp_seats = bus1->seats;
+
 	bus1->bus_number = bus2->bus_number;
+	bus1->seats = bus2->seats;
+
 	bus2->bus_number = temp_bus_number;
+	bus2->seats = temp_seats;
 }
+
 
 int countBuses(struct Bus* head) {
 	int count = 0;
@@ -199,7 +204,7 @@ void bubbleSortBusesByAvailableSeats(struct Bus* head) {
 	for (int i = 0; i < n - 1; i++) {
 		currentBus = head;
 		for (int j = 0; j < n - i - 1; j++) {
-			if (countAvailableSeats(currentBus) < countAvailableSeats(currentBus->next)) {
+			if (countAvailableSeats(currentBus) > countAvailableSeats(currentBus->next)) {
 				swapBuses(currentBus, currentBus->next);
 			}
 			currentBus = currentBus->next;
@@ -207,9 +212,6 @@ void bubbleSortBusesByAvailableSeats(struct Bus* head) {
 		last = currentBus;
 	}
 }
-
-
-
 
 int main() {
 	int totalBuses = 5;
